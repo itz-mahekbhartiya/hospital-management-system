@@ -1,13 +1,11 @@
 import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { Link, Navigate } from 'react-router-dom';
-// Import the Zustand store
 import { useAuthStore } from '../store/authStore';
 import { LogIn, Stethoscope } from 'lucide-react';
 
 const LoginPage = () => {
     const { register, handleSubmit, formState: { errors } } = useForm();
-    // Get state and actions from Zustand
     const { login, isAuthenticated } = useAuthStore();
     const [authError, setAuthError] = useState(null);
     const [isLoading, setIsLoading] = useState(false);
@@ -17,15 +15,12 @@ const LoginPage = () => {
         setIsLoading(true);
         try {
             await login(data.email, data.password);
-            // On success, the App.jsx router will redirect
         } catch (error) {
             setAuthError(error.message);
         }
         setIsLoading(false);
     };
 
-    // If user is already logged in, redirect them
-    // We get isAuthenticated directly from the store
     if (isAuthenticated) {
         return <Navigate to="/dashboard" replace />;
     }

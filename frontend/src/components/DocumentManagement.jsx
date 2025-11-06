@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { getAllDocuments, deleteDocument } from '../api/documentApi';
 import { Download, Trash2, FileText } from 'lucide-react';
-import { API_URL } from '../api/api'; // Import base URL for download links
+import { API_URL } from '../api/api'; 
 
 const DocumentRow = ({ doc, onDelete }) => {
     const [isDeleting, setIsDeleting] = useState(false);
@@ -11,7 +11,7 @@ const DocumentRow = ({ doc, onDelete }) => {
             setIsDeleting(true);
             try {
                 await deleteDocument(doc._id);
-                onDelete(doc._id); // Tell parent to remove from list
+                onDelete(doc._id); 
             } catch (error) {
                 alert('Failed to delete document.');
                 setIsDeleting(false);

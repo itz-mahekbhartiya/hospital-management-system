@@ -11,7 +11,6 @@ const BookAppointment = ({ onBookingSuccess }) => {
     const [apiError, setApiError] = useState(null);
     const [apiSuccess, setApiSuccess] = useState(null);
 
-    // Fetch doctors when component loads
     useEffect(() => {
         const fetchDoctors = async () => {
             try {
@@ -29,16 +28,16 @@ const BookAppointment = ({ onBookingSuccess }) => {
         setApiError(null);
         setApiSuccess(null);
         try {
-            // Combine date and time into a single ISO string
+            
             const appointmentDate = new Date(`${data.date}T${data.time}:00`);
             
             await bookAppointment(data.doctor, appointmentDate.toISOString(), data.reason);
             setApiSuccess('Appointment booked successfully! The doctor will confirm it soon.');
             reset();
             
-            // Call the success callback to switch tabs
+           
             if (onBookingSuccess) {
-                setTimeout(() => onBookingSuccess(), 2000); // Switch after 2s
+                setTimeout(() => onBookingSuccess(), 2000); 
             }
         } catch (error) {
             setApiError(error.response?.data?.msg || 'Failed to book appointment.');
@@ -83,7 +82,7 @@ const BookAppointment = ({ onBookingSuccess }) => {
                             id="date"
                             type="date"
                             className="w-full px-3 py-2 mt-1 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
-                            min={new Date().toISOString().split('T')[0]} // No past dates
+                            min={new Date().toISOString().split('T')[0]}
                             {...register('date', { required: 'Please select a date' })}
                         />
                         {errors.date && <p className="mt-1 text-sm text-red-600">{errors.date.message}</p>}

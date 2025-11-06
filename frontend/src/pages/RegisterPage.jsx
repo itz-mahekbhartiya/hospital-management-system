@@ -104,7 +104,6 @@ const RegisterPage = () => {
                         >
                             <option value="PATIENT">Patient</option>
                             <option value="DOCTOR">Doctor</option>
-                            {/* Included for testing as per our plan */}
                             <option value="ADMIN">Admin</option> 
                         </select>
                         {errors.role && <p className="mt-1 text-sm text-red-600">{errors.role.message}</p>}

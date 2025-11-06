@@ -8,16 +8,13 @@ exports.createAppointment = async (req, res) => {
     const { doctor, date, reason } = req.body;
 
     try {
-        // We get the patient ID from the logged-in user (from 'protect' middleware)
         const patient = req.user.id;
 
-        // Check if the doctor exists and is a doctor
         const doctorUser = await User.findById(doctor);
         if (!doctorUser || doctorUser.role !== 'DOCTOR') {
             return res.status(404).json({ msg: 'Doctor not found' });
         }
 
-        // Create new appointment
         const appointment = new Appointment({
             patient,
             doctor,
@@ -46,11 +43,11 @@ exports.getMyAppointments = async (req, res) => {
 
         if (req.user.role === 'PATIENT') {
             appointments = await Appointment.find({ patient: req.user.id })
-                .populate('doctor', 'name specialty') // Get doctor's name
-                .sort({ date: 'desc' }); // Show most recent first
+                .populate('doctor', 'name specialty')
+                .sort({ date: 'desc' }); 
         } else if (req.user.role === 'DOCTOR') {
             appointments = await Appointment.find({ doctor: req.user.id })
-                .populate('patient', 'name email') // Get patient's name
+                .populate('patient', 'name email') 
                 .sort({ date: 'desc' });
         } else {
             return res.status(400).json({ msg: 'No appointments found for this role.' });
@@ -74,13 +71,12 @@ exports.cancelAppointment = async (req, res) => {
             return res.status(404).json({ msg: 'Appointment not found' });
         }
 
-        // Check if the logged-in user is the patient who booked it
-        // Note: .toString() is important because .patient is a Mongoose ObjectId
+        
         if (appointment.patient.toString() !== req.user.id) {
             return res.status(401).json({ msg: 'User not authorized' });
         }
 
-        // We can only cancel appointments that are PENDING
+        
         if (appointment.status !== 'PENDING') {
             return res.status(400).json({ msg: 'Cannot cancel a confirmed or completed appointment' });
         }
@@ -102,7 +98,7 @@ exports.updateAppointmentStatus = async (req, res) => {
     const { status } = req.body;
     const { id } = req.params;
 
-    // Simple validation for status
+    
     const allowedStatus = ['CONFIRMED', 'COMPLETED', 'CANCELLED'];
     if (!allowedStatus.includes(status)) {
         return res.status(400).json({ msg: 'Invalid status' });
@@ -115,12 +111,12 @@ exports.updateAppointmentStatus = async (req, res) => {
             return res.status(404).json({ msg: 'Appointment not found' });
         }
 
-        // Check if the logged-in user is the doctor for this appointment
+        
         if (appointment.doctor.toString() !== req.user.id) {
             return res.status(401).json({ msg: 'User not authorized' });
         }
 
-        // Update the status
+        
         appointment.status = status;
         await appointment.save();
 
@@ -138,9 +134,9 @@ exports.updateAppointmentStatus = async (req, res) => {
 exports.getAllAppointments = async (req, res) => {
     try {
         const appointments = await Appointment.find()
-            .populate('patient', 'name email') // Get patient details
-            .populate('doctor', 'name specialty') // Get doctor details
-            .sort({ date: 'desc' }); // Show newest first
+            .populate('patient', 'name email') 
+            .populate('doctor', 'name specialty') 
+            .sort({ date: 'desc' }); 
         
         res.status(200).json(appointments);
     } catch (err) {

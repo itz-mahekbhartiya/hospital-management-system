@@ -102,7 +102,7 @@ const MyAppointments = () => {
         }
         try {
             await cancelBooking(id);
-            // Refresh the list after cancelling
+            
             fetchBookings(); 
         } catch (error) {
             setError(error.response?.data?.msg || 'Failed to cancel appointment.');

@@ -1,14 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { getMyDocuments } from '../api/documentApi';
 import { FileText, Download, ChevronDown, ChevronUp, AlertTriangle } from 'lucide-react';
-import { API_URL } from '../api/api'; // We'll need to update api.js to export this
+import { API_URL } from '../api/api'; 
 
-// This is the Accordion Row you described
+
 const HistoryRow = ({ doc }) => {
     const [isOpen, setIsOpen] = useState(false);
 
-    // We need to get the file from our backend server, not the frontend one
-    // We will update api.js to export the base URL
+    
     const fileUrl = `http://localhost:5001/${doc.filePath}`;
 
     return (
@@ -46,7 +45,7 @@ const HistoryRow = ({ doc }) => {
                             <a
                                 href={fileUrl}
                                 download
-                                target="_blank" // Open in new tab (safe for PDFs)
+                                target="_blank"
                                 rel="noopener noreferrer"
                                 className="flex items-center justify-center mt-4 sm:mt-0 px-4 py-2 text-sm font-medium text-white bg-indigo-600 border border-transparent rounded-md shadow-sm hover:bg-indigo-700 focus:outline-none"
                             >

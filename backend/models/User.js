@@ -19,7 +19,7 @@ const UserSchema = new mongoose.Schema({
         type: String,
         required: [true, 'Please provide a password'],
         minlength: 8,
-        select: false // Will not be returned in queries by default
+        select: false 
     },
     role: {
         type: String,
@@ -27,7 +27,7 @@ const UserSchema = new mongoose.Schema({
         default: 'PATIENT'
     },
     
-    // --- Role-Specific Fields ---
+    // Role-Specific Fields
 
     // Patient Fields
     medicalHistory: {
@@ -43,20 +43,20 @@ const UserSchema = new mongoose.Schema({
     },
 
 
-    // Staff Fields (Doctor, Admin)
-    isActive: { // For Admin to control staff
+    
+    isActive: { 
         type: Boolean,
         default: true
     }
 
-}, { timestamps: true }); // Adds createdAt and updatedAt
+}, { timestamps: true }); 
 
 
 
 
-// --- Mongoose Middleware ---
+// Mongoose Middleware
 
-// Hash password before saving
+
 UserSchema.pre('save', async function(next) {
     if (!this.isModified('password')) {
         next();
@@ -66,7 +66,7 @@ UserSchema.pre('save', async function(next) {
     next();
 });
 
-// Method to compare entered password with hashed password
+
 UserSchema.methods.matchPassword = async function(enteredPassword) {
     return await bcrypt.compare(enteredPassword, this.password);
 };

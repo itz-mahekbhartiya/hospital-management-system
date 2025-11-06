@@ -3,9 +3,8 @@ import { useForm } from 'react-hook-form';
 import { getDocumentsForPatient, uploadDocument } from '../api/documentApi';
 import { X, Upload, FileText, Download, Trash2, Send } from 'lucide-react';
 
-// A single document row
+
 const DocumentRow = ({ doc }) => {
-    // Build the full URL to the file on the backend
     const fileUrl = `http://localhost:5001/${doc.filePath}`;
 
     return (

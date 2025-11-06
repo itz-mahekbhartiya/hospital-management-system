@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { getAllUsers } from '../api/userApi';
 import { Users, Plus } from 'lucide-react';
-import AddUserModal from './AddUserModal'; // We'll create this next
+import AddUserModal from './AddUserModal'; 
 
 const UserRow = ({ user }) => (
     <tr className="hover:bg-gray-50">
@@ -44,8 +44,8 @@ const UserManagement = () => {
     }, []);
 
     const onUserAdded = (newUser) => {
-        setUsers(prevUsers => [newUser, ...prevUsers]); // Add new user to top
-        setIsModalOpen(false); // Close modal
+        setUsers(prevUsers => [newUser, ...prevUsers]);
+        setIsModalOpen(false);
     };
 
     if (isLoading) return <div className="text-center p-4">Loading users...</div>;

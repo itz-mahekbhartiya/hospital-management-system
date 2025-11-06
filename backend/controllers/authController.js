@@ -23,7 +23,7 @@ exports.register = async (req, res) => {
             name,
             email,
             password,
-            role: role || 'PATIENT' // Default to PATIENT if no role is provided
+            role: role || 'PATIENT' 
         });
 
         const token = generateToken(user._id);
@@ -55,7 +55,7 @@ exports.login = async (req, res) => {
             return res.status(400).json({ msg: 'Please provide an email and password' });
         }
 
-        // Find user by email, and explicitly include the password
+        
         const user = await User.findOne({ email }).select('+password');
 
         if (!user) {
@@ -90,6 +90,6 @@ exports.login = async (req, res) => {
 // @route   GET /api/auth/me
 // @access  Private
 exports.getMe = async (req, res) => {
-    // req.user is attached by the 'protect' middleware
+    
     res.status(200).json(req.user);
 };

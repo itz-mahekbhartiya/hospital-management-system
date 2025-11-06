@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useAuthStore } from '../store/authStore';
 import { Calendar, FileText, PlusCircle } from 'lucide-react';
 
-// Import the components we are about to create
+
 import MyAppointments from '../components/MyAppointments';
 import MedicalHistory from '../components/MedicalHistory';
 import BookAppointment from '../components/BookAppointment';
@@ -23,7 +23,6 @@ const PatientDashboard = () => {
             case TABS.MY_APPOINTMENTS:
                 return <MyAppointments />;
             case TABS.BOOK_APPOINTMENT:
-                // Pass a function to switch back to 'My Appointments' after booking
                 return <BookAppointment onBookingSuccess={() => setActiveTab(TABS.MY_APPOINTMENTS)} />;
             case TABS.MEDICAL_HISTORY:
                 return <MedicalHistory />;
@@ -41,7 +40,7 @@ const PatientDashboard = () => {
                 Here you can manage your appointments and view your medical history.
             </p>
 
-            {/* --- Tab Navigation --- */}
+            {/* Tab Navigation  */}
             <div className="mt-6 border-b border-gray-200">
                 <nav className="-mb-px flex flex-wrap gap-x-6" aria-label="Tabs">
                     <button
@@ -80,7 +79,7 @@ const PatientDashboard = () => {
                 </nav>
             </div>
 
-            {/* --- Tab Content --- */}
+            {/* Tab Content */}
             <div className="mt-8">
                 {renderTabContent()}
             </div>

@@ -3,7 +3,7 @@ import { useAuthStore } from '../store/authStore';
 import { getMyBookings, updateBookingStatus } from '../api/appointmentApi';
 import { Clock, Check, User, ChevronRight } from 'lucide-react';
 
-// We will create this component next
+
 import PatientDetailsModal from '../components/PatientDetailsModal';
 
 const DoctorDashboard = () => {
@@ -12,14 +12,14 @@ const DoctorDashboard = () => {
     const [isLoading, setIsLoading] = useState(true);
     const [error, setError] = useState(null);
     
-    // State for the modal
+
     const [selectedAppointment, setSelectedAppointment] = useState(null);
 
     const fetchAppointments = async () => {
         setIsLoading(true);
         setError(null);
         try {
-            // This API function already works for doctors
+            
             const data = await getMyBookings(); 
             setAppointments(data);
         } catch (error) {
@@ -35,7 +35,7 @@ const DoctorDashboard = () => {
     const handleStatusChange = async (id, newStatus) => {
         try {
             await updateBookingStatus(id, newStatus);
-            // Refresh the list to show the change
+            
             fetchAppointments(); 
         } catch (error) {
             setError('Failed to update status.');
@@ -62,7 +62,7 @@ const DoctorDashboard = () => {
                 {appointments.map(appt => (
                     <li key={appt._id} className="bg-white p-4 rounded-lg shadow-sm border border-gray-200">
                         <div className="flex flex-col sm:flex-row justify-between">
-                            {/* Appointment Info */}
+                            
                             <div>
                                 <p className="text-lg font-semibold text-indigo-700">
                                     {new Date(appt.date).toLocaleString('en-US', {
@@ -88,7 +88,7 @@ const DoctorDashboard = () => {
                                 </p>
                             </div>
 
-                            {/* Action Buttons */}
+                            
                             <div className="flex flex-col items-start sm:items-end mt-4 sm:mt-0 space-y-3">
                                 <button
                                     onClick={() => handleViewPatient(appt)}
@@ -138,7 +138,7 @@ const DoctorDashboard = () => {
                 {renderContent()}
             </div>
 
-            {/* The Modal for viewing patient details */}
+            
             {selectedAppointment && (
                 <PatientDetailsModal
                     appointment={selectedAppointment}

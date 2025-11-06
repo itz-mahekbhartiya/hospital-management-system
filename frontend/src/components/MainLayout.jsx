@@ -1,11 +1,9 @@
 import React from 'react';
 import { Outlet, Link } from 'react-router-dom';
-// Import the Zustand store
 import { useAuthStore } from '../store/authStore';
 import { LogOut, User, Stethoscope } from 'lucide-react';
 
 const MainLayout = () => {
-    // Get state and actions from Zustand
     const { user, logout } = useAuthStore();
 
     return (
@@ -39,7 +37,6 @@ const MainLayout = () => {
             {/* --- Page Content --- */}
             <main className="flex-grow bg-gray-100 p-4 md:p-8">
                 <div className="max-w-7xl mx-auto">
-                    {/* The specific page (e.g., AdminDashboard) will be rendered here */}
                     <Outlet /> 
                 </div>
             </main>

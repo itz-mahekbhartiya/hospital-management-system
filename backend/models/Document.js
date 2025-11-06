@@ -8,25 +8,21 @@ const DocumentSchema = new mongoose.Schema({
     },
     uploadedBy: {
         type: mongoose.Schema.ObjectId,
-        ref: 'User', // This will be the Doctor
+        ref: 'User',
         required: true
     },
-    // The original name of the file on the user's computer
     fileName: {
         type: String,
         required: true
     },
-    // The path to the file on the server (e.g., 'uploads/document-12345.pdf')
     filePath: {
         type: String,
         required: true
     },
-    // e.g., 'application/pdf', 'image/jpeg'
     fileType: {
         type: String,
         required: true
     },
-    // e.g., 'Prescription', 'Lab Result', 'Medical Report'
     documentType: {
         type: String,
         enum: ['PRESCRIPTION', 'LAB_RESULT', 'MEDICAL_REPORT', 'OTHER'],

@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useAuthStore } from '../store/authStore';
 import { Users, Calendar, FileText } from 'lucide-react';
 
-// Import the components
+
 import UserManagement from '../components/UserManagement';
 import AllAppointmentsList from '../components/AllAppointmentsList';
 import DocumentManagement from '../components/DocumentManagement';

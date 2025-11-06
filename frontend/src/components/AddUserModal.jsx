@@ -8,7 +8,7 @@ const AddUserModal = ({ onClose, onUserAdded }) => {
     const [apiError, setApiError] = useState(null);
     const [isLoading, setIsLoading] = useState(false);
 
-    // Watch the 'role' field to conditionally show the 'specialty' field
+   
     const selectedRole = watch('role');
 
     const onSubmit = async (data) => {
@@ -16,7 +16,7 @@ const AddUserModal = ({ onClose, onUserAdded }) => {
         setApiError(null);
         try {
             const newUser = await createUser(data);
-            onUserAdded(newUser); // Pass new user back to parent
+            onUserAdded(newUser); 
             reset();
         } catch (error) {
             setApiError(error.response?.data?.msg || 'Failed to create user.');
